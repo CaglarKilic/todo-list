@@ -5,9 +5,9 @@ export default class Card {
   description;
   dueDate;
   priority;
-  id;
+  uid;
   constructor(title) {
     this.title = title;
-    this.id = generateId();
+    this.uid = generateId();
   }
 }

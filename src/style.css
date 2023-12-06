@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "Roboto";
+  src: url(assets/Roboto-Regular.ttf);
+}
+
+:root {
+  --dark-theme-main: #1e1e1e;
+  --dark-theme-side: #282828;
+  --dark-theme-sidebar-hover: #363636;
+  --dark-theme-text: white;
+  font-family: "Roboto";
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  height: 100svh;
+  display: grid;
+  grid-template-columns: 366px auto;
+  grid-template-rows: min-content 1fr;
+}
+
+header {
+  background-color: white;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+aside {
+  background-color: var(--dark-theme-side);
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  padding: 1rem;
+  color: white;
+  & nav:nth-child(1) {
+    & li:nth-child(1) {
+      color: #ed6a5e;
+    }
+  }
+}
+
+main {
+  background-color: var(--dark-theme-main);
+}

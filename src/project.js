@@ -3,22 +3,35 @@ import generateId from "./utility";
 
 export default class Project {
   title;
-  id;
-  #cards = new MyMap();
+  uid;
+  #dos = new MyMap();
+  #done = new MyMap();
   constructor(title) {
     this.title = title;
-    this.id = generateId();
+    this.uid = generateId();
   }
 
+  getCard(card) {
+    return this.#dos.get(card.uid)  || this.#done.get(card.uid);
+  }
+
+  getCardStatus(card) {
+    return this.#dos.has(card.uid);
+  }
+  
   addCard(card) {
-    this.#cards.set(card.id, card);
+    this.#dos.set(card.uid, card);
   }
 
   removeCard(card) {
-    return this.#cards.remove(card.id);
+    return this.#dos.remove(card.uid) || this.#done.remove(card.uid);
   }
 
-  size() {
-    return this.#cards.size;
+  changeCardStatus(card) {
+    if (this.getCardStatus(card)) {
+      this.#done.set(card.uid, this.removeCard(card));
+    } else {
+      this.#dos.set(card.uid, this.removeCard(card));
+    }
   }
 }

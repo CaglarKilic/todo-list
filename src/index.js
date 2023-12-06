@@ -1,11 +1,12 @@
 import MyMap from "./ds";
 import Project from "./project";
+import Card from "./card.js";
 
-const projects = (function () {
-  const inbox = new Project("Inbox");
+const Projects = (function () {
   const container = new MyMap();
-  container.set(inbox.id, inbox);
-  return container;
+  function addProject(title) {
+    const project = new Project(title);
+    container.set(project.uid, project);
+  }
+  return { container, addProject };
 })();
-
-console.log(projects);
