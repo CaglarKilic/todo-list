@@ -21,12 +21,12 @@
 body {
   height: 100svh;
   display: grid;
-  grid-template-columns: 366px auto;
-  grid-template-rows: min-content 1fr;
+  grid-template-columns: 330px auto;
+  grid-template-rows: 88px auto;
 }
 
 header {
-  background-color: white;
+  background-color: var(--dark-theme-main);
   grid-column: 2;
   grid-row: 1;
 }
@@ -36,14 +36,10 @@ aside {
   grid-column: 1;
   grid-row: 1 / span 2;
   padding: 1rem;
-  color: white;
-  & nav:nth-child(1) {
-    & li:nth-child(1) {
-      color: #ed6a5e;
-    }
-  }
 }
 
 main {
   background-color: var(--dark-theme-main);
+  grid-column: 2;
+  grid-row: 2;
 }
