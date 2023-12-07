@@ -1,6 +1,7 @@
 import MyMap from "./ds";
 import Project from "./project";
 import Card from "./card.js";
+import "./style.css";
 
 const Projects = (function () {
   const container = new MyMap();
