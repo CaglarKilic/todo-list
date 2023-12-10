@@ -1,6 +1,5 @@
 import MyMap from "./ds";
 import Project from "./project";
-import Card from "./card.js";
 import "./style.css";
 import Dom from "./dom.js";
 
@@ -24,12 +23,12 @@ document
   .querySelector("input[name=task")
   .addEventListener(
     "input",
-    Dom.toggleButton(document.forms.addTask.elements.addTask)
+    Dom.toggleButton(document.forms.addTask.elements.buttonAddTask)
   );
 
 document.forms.addTask.elements.buttonAddTask.addEventListener(
   "click",
-  Dom.addTask
+  Dom.addTask(Projects.getProjects())
 );
 
 document

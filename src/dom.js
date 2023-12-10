@@ -10,7 +10,6 @@ const Dom = (function () {
   function manageAddTaskModal(projects) {
     return function () {
       const select = document.forms.addTask.elements.projects;
-      console.log(select);
       projects.forEach((project) => {
         const option = document.createElement("option");
         option.value = project.uid;
@@ -21,20 +20,21 @@ const Dom = (function () {
     };
   }
 
-  function addTask(event) {
-    const form = event.target.form;
-    const elements = form.elements;
-    const project =
-      elements.projects.options[elements.projects.selectedIndex].value;
+  function addTask(projects) {
+    return function (event) {
+      const form = event.target.form;
+      const elements = form.elements;
+      const project =
+        elements.projects.options[elements.projects.selectedIndex].value;
 
-    const card = new Card(elements.task.value);
-    card.description = elements.description.value;
-    card.date = elements.due.value;
-    card.priority =
-      elements.priority.options[elements.priority.selectedIndex].value;
+      const card = new Card(elements.task.value);
+      card.description = elements.description.value;
+      card.date = elements.due.value;
+      card.priority =
+        elements.priority.options[elements.priority.selectedIndex].value;
 
-    project.addCard(card);
-    console.log(project);
+      projects.get(project).addCard(card);
+    };
   }
 
   return { toggleButton, addTask, manageAddTaskModal };
