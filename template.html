@@ -17,21 +17,19 @@
     </aside>
     <main>
       <dialog open>
-        <form>
-          <input type="text" name="task" placeholder="Task name">
+        <form onsubmit="return false">
+          <input type="text" name="task" placeholder="Task name" />
           <textarea name="description" placeholder="description"></textarea>
-          <input type="date" name="due" placeholder="Due Date">
+          <input type="date" name="due" placeholder="Due Date" />
           <select name="priority">
-            <option>1</option>
+            <option value="1">Top</option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
           </select>
-          <select name="project">
-            <option selecteds>Inbox</option>
-          </select>
+          <select name="projects"></select>
           <button>Cancel</button>
-          <button>Add Task</button>
+          <button disabled id="AddTask">Add Task</button>
         </form>
       </dialog>
     </main>
