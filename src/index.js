@@ -14,15 +14,27 @@ const Projects = (function () {
     return project;
   }
 
-  return { addProject, activeProject };
+  function getProjects() {
+    return container;
+  }
+
+  return { addProject, activeProject, getProjects };
 })();
 document
   .querySelector("input[name=task")
   .addEventListener(
     "input",
-    Dom.toggleButton(document.querySelector("#AddTask"))
+    Dom.toggleButton(document.forms.addTask.elements.addTask)
   );
 
+document.forms.addTask.elements.buttonAddTask.addEventListener(
+  "click",
+  Dom.addTask
+);
+
 document
-  .querySelector("#AddTask")
-  .addEventListener("click", Dom.addTask);
+  .querySelector("menu>li")
+  .addEventListener("click", Dom.manageAddTaskModal(Projects.getProjects()));
+
+Projects.addProject("deneme");
+Projects.addProject("hebele");

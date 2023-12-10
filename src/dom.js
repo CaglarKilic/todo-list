@@ -7,6 +7,20 @@ const Dom = (function () {
     };
   }
 
+  function manageAddTaskModal(projects) {
+    return function () {
+      const select = document.forms.addTask.elements.projects;
+      console.log(select);
+      projects.forEach((project) => {
+        const option = document.createElement("option");
+        option.value = project.uid;
+        option.textContent = project.title;
+        select.append(option);
+      });
+      document.querySelector("dialog#addTask").showModal();
+    };
+  }
+
   function addTask(event) {
     const form = event.target.form;
     const elements = form.elements;
@@ -23,7 +37,7 @@ const Dom = (function () {
     console.log(project);
   }
 
-  return { toggleButton, addTask };
+  return { toggleButton, addTask, manageAddTaskModal };
 })();
 
 export default Dom;

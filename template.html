@@ -9,15 +9,17 @@
     <header></header>
     <aside>
       <nav>
-        <menu></menu>
+        <menu>
+          <li>Add Task</li>
+        </menu>
       </nav>
       <nav>
         <menu></menu>
       </nav>
     </aside>
     <main>
-      <dialog open>
-        <form onsubmit="return false">
+      <dialog id="addTask">
+        <form name="addTask" onsubmit="return false">
           <input type="text" name="task" placeholder="Task name" />
           <textarea name="description" placeholder="description"></textarea>
           <input type="date" name="due" placeholder="Due Date" />
@@ -29,7 +31,7 @@
           </select>
           <select name="projects"></select>
           <button>Cancel</button>
-          <button disabled id="AddTask">Add Task</button>
+          <button disabled name="buttonAddTask">Add Task</button>
         </form>
       </dialog>
     </main>
