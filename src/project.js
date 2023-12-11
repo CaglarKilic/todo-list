@@ -8,17 +8,21 @@ export default class Project {
   #done = new MyMap();
   constructor(title) {
     this.title = title;
-    this.uid = generateId();
+    if (title == "Inbox") {
+      this.uid = "00000001";
+    } else {
+      this.uid = generateId();
+    }
   }
 
   getCard(card) {
-    return this.#dos.get(card.uid)  || this.#done.get(card.uid);
+    return this.#dos.get(card.uid) || this.#done.get(card.uid);
   }
 
   getCardStatus(card) {
     return this.#dos.has(card.uid);
   }
-  
+
   addCard(card) {
     this.#dos.set(card.uid, card);
   }

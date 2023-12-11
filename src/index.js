@@ -5,7 +5,6 @@ import Dom from "./dom.js";
 
 const Projects = (function () {
   const container = new MyMap();
-  let activeProject = addProject("Inbox");
 
   function addProject(title) {
     const project = new Project(title);
@@ -17,10 +16,10 @@ const Projects = (function () {
     return container;
   }
 
-  return { addProject, activeProject, getProjects };
+  return { addProject, getProjects };
 })();
 document
-  .querySelector("input[name=task")
+  .querySelector("input[name=task]")
   .addEventListener(
     "input",
     Dom.toggleButton(document.forms.addTask.elements.buttonAddTask)
