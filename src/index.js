@@ -4,19 +4,15 @@ import "./style.css";
 import Dom from "./dom.js";
 
 const Projects = (function () {
-  const container = new MyMap();
+  const items = new MyMap();
 
   function addProject(title) {
     const project = new Project(title);
-    container.set(project.uid, project);
+    items.set(project.uid, project);
     return project;
   }
 
-  function getProjects() {
-    return container;
-  }
-
-  return { addProject, getProjects };
+  return { addProject, items };
 })();
 document
   .querySelector("input[name=task]")
@@ -27,12 +23,13 @@ document
 
 document.forms.addTask.elements.buttonAddTask.addEventListener(
   "click",
-  Dom.addTask(Projects.getProjects())
+  Dom.addTask(Projects.items)
 );
 
 document
   .querySelector("menu>li")
-  .addEventListener("click", Dom.manageAddTaskModal(Projects.getProjects()));
+  .addEventListener("click", Dom.manageAddTaskModal(Projects.items));
 
+Projects.addProject("Inbox");
 Projects.addProject("deneme");
 Projects.addProject("hebele");

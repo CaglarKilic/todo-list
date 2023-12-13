@@ -38,4 +38,8 @@ export default class Project {
       this.#dos.set(card.uid, this.removeCard(card));
     }
   }
+
+  get cards() {
+    return this.#dos;
+  }
 }

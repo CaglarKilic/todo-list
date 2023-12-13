@@ -6,7 +6,11 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <header></header>
+    <header>
+      <template>
+        <h1></h1>
+      </template>
+    </header>
     <aside>
       <nav>
         <menu>
@@ -18,6 +22,14 @@
       </nav>
     </aside>
     <main>
+      <template>
+        <section>
+          <h2></h2>
+          <p></p>
+          <p></p>
+          <p></p>
+        </section>
+      </template>
       <dialog id="addTask">
         <form name="addTask" onsubmit="return false">
           <input type="text" name="task" placeholder="Task name" />

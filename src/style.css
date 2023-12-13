@@ -4,6 +4,7 @@
   --dark-theme-sidebar-hover: #363636;
   --dark-theme-text: white;
   font-family: "Roboto";
+  color: var(--dark-theme-text);
 }
 
 * {
