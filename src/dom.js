@@ -53,11 +53,13 @@ const Dom = (function () {
       header.replaceChildren();
       main.replaceChildren();
 
-      let template = document.querySelector("#projectTitleTemplate").cloneNode(true);
+      let template = document
+        .querySelector("#projectTitleTemplate")
+        .cloneNode(true);
       template.content.children.namedItem("projectTitle").append(project.title);
       header.append(template.content);
-      
-      project.cards.forEach(card => {
+
+      project.cards.forEach((card) => {
         template = document.querySelector("#cardTemplate").cloneNode(true);
         const section = template.content.firstElementChild;
         const elements = section.children;
@@ -67,10 +69,32 @@ const Dom = (function () {
         elements.namedItem("description").append(card.description);
         elements.namedItem("priority").append(card.priority);
         main.append(section);
-      })
+      });
     };
   }
-  return { toggleButton, addTask, manageAddTaskModal, activeProject };
+
+  function manageAddProjectModal() {
+    const dialog = document.querySelector("#addProject");
+    dialog.showModal();
+  }
+
+  function addProject(projects) {
+    return function (event) {
+      const form = event.target.form;
+      const title = form.elements.projectTitle.value;
+
+      const project = projects.addProject(title);
+    };
+  }
+
+  return {
+    toggleButton,
+    addTask,
+    manageAddTaskModal,
+    activeProject,
+    manageAddProjectModal,
+    addProject,
+  };
 })();
 
 export default Dom;

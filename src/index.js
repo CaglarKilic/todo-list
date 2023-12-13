@@ -1,7 +1,7 @@
 import MyMap from "./ds";
 import Project from "./project";
 import "./style.css";
-import Dom from "./dom.js";
+import Dom from "./Dom.js";
 
 const Projects = (function () {
   const items = new MyMap();
@@ -27,8 +27,24 @@ document.forms.addTask.elements.buttonAddTask.addEventListener(
 );
 
 document
-  .querySelector("menu>li")
+  .querySelector("menu#mainMenu>li")
   .addEventListener("click", Dom.manageAddTaskModal(Projects.items));
+
+document
+  .querySelector("input[name=projectTitle")
+  .addEventListener(
+    "input",
+    Dom.toggleButton(document.forms.addProject.elements.buttonAddProject)
+  );
+
+document.forms.addProject.elements.buttonAddProject.addEventListener(
+  "click",
+  Dom.addProject(Projects)
+);
+
+document
+  .querySelector("menu#projectsMenu>li")
+  .addEventListener("click", Dom.manageAddProjectModal);
 
 Projects.addProject("Inbox");
 Projects.addProject("deneme");

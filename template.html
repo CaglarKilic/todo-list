@@ -9,12 +9,12 @@
     <header></header>
     <aside>
       <nav>
-        <menu>
+        <menu id="mainMenu">
           <li>Add Task</li>
         </menu>
-      </nav>
-      <nav>
-        <menu></menu>
+        <menu id="projectsMenu">
+          <li>My Projects</li>
+        </menu>
       </nav>
     </aside>
     <main></main>
@@ -35,6 +35,13 @@
       <button disabled name="buttonAddTask">Add Task</button>
     </form>
   </dialog>
+  <dialog id="addProject">
+    <form name="addProject" onsubmit="return false">
+      <input type="text" name="projectTitle" placeholder="Project Name" />
+      <button>Cancel</button>
+      <button disabled name="buttonAddProject">Add Project</button>
+    </form>
+  </dialog>
   <template id="cardTemplate">
     <section>
       <h2 id="cardTitle"></h2>
@@ -46,5 +53,9 @@
 
   <template id="projectTitleTemplate">
     <h1 id="projectTitle"></h1>
+  </template>
+
+  <template id="projectsTemplate">
+    <li></li>
   </template>
 </html>
