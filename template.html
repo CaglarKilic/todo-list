@@ -6,11 +6,7 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <header>
-      <template>
-        <h1></h1>
-      </template>
-    </header>
+    <header></header>
     <aside>
       <nav>
         <menu>
@@ -21,31 +17,34 @@
         <menu></menu>
       </nav>
     </aside>
-    <main>
-      <template>
-        <section>
-          <h2></h2>
-          <p></p>
-          <p></p>
-          <p></p>
-        </section>
-      </template>
-      <dialog id="addTask">
-        <form name="addTask" onsubmit="return false">
-          <input type="text" name="task" placeholder="Task name" />
-          <textarea name="description" placeholder="description"></textarea>
-          <input type="date" name="due" placeholder="Due Date" />
-          <select name="priority">
-            <option value="1">Top</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-          <select name="projects"></select>
-          <button>Cancel</button>
-          <button disabled name="buttonAddTask">Add Task</button>
-        </form>
-      </dialog>
-    </main>
+    <main></main>
   </body>
+  <dialog id="addTask">
+    <form name="addTask" onsubmit="return false">
+      <input type="text" name="task" placeholder="Task name" />
+      <textarea name="description" placeholder="description"></textarea>
+      <input type="date" name="due" placeholder="Due Date" />
+      <select name="priority">
+        <option value="1">Top</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select>
+      <select name="projects"></select>
+      <button>Cancel</button>
+      <button disabled name="buttonAddTask">Add Task</button>
+    </form>
+  </dialog>
+  <template id="cardTemplate">
+    <section>
+      <h2 id="cardTitle"></h2>
+      <p id="description"></p>
+      <p id="dueDate"></p>
+      <p id="priority"></p>
+    </section>
+  </template>
+
+  <template id="projectTitleTemplate">
+    <h1 id="projectTitle"></h1>
+  </template>
 </html>

@@ -50,8 +50,24 @@ const Dom = (function () {
       const header = document.querySelector("header");
       const main = document.querySelector("main");
 
-      console.log(header.children);
-      project.cards.forEach((card) => {});
+      header.replaceChildren();
+      main.replaceChildren();
+
+      let template = document.querySelector("#projectTitleTemplate").cloneNode(true);
+      template.content.children.namedItem("projectTitle").append(project.title);
+      header.append(template.content);
+      
+      project.cards.forEach(card => {
+        template = document.querySelector("#cardTemplate").cloneNode(true);
+        const section = template.content.firstElementChild;
+        const elements = section.children;
+        section.id = card.uid;
+        elements.namedItem("cardTitle").append(card.title);
+        elements.namedItem("dueDate").append(card.dueDate);
+        elements.namedItem("description").append(card.description);
+        elements.namedItem("priority").append(card.priority);
+        main.append(section);
+      })
     };
   }
   return { toggleButton, addTask, manageAddTaskModal, activeProject };
