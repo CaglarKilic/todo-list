@@ -35,8 +35,6 @@ const Dom = (function () {
       card.priority =
         elements.priority.options[elements.priority.selectedIndex].value;
 
-      console.log(card);
-
       const project = projects.get(projectUID);
       project.addCard(card);
 
@@ -106,6 +104,7 @@ const Dom = (function () {
     activeProject,
     manageAddProjectModal,
     addProject,
+    displayProject,
   };
 })();
 

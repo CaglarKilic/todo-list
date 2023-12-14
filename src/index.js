@@ -14,6 +14,7 @@ const Projects = (function () {
 
   return { addProject, items };
 })();
+
 document
   .querySelector("input[name=task]")
   .addEventListener(
@@ -46,4 +47,8 @@ document
   .querySelector("menu#projectsMenu>h2")
   .addEventListener("click", Dom.manageAddProjectModal);
 
-Projects.addProject("Inbox");
+document
+  .querySelector("menu#mainMenu>li:nth-child(2)")
+  .addEventListener("click", Dom.displayProject(Projects.items));
+
+Dom.displayProject(Projects.addProject("Inbox"))(null);
