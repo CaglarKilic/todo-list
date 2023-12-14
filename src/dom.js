@@ -2,6 +2,7 @@ import Card from "./card";
 
 const Dom = (function () {
   let activeProject = "00000001"; //Inbox
+  let pickedCard = null;
 
   function toggleButton(button) {
     return function (event) {
@@ -31,15 +32,18 @@ const Dom = (function () {
       const elements = form.elements;
       const projectUID =
         elements.projects.options[elements.projects.selectedIndex].value;
+      const project = projects.get(projectUID);
 
-      const card = new Card(elements.task.value);
+      const card = pickedCard || new Card(elements.task.value);
+
       card.description = elements.description.value;
       card.dueDate = elements.due.value;
       card.priority =
         elements.priority.options[elements.priority.selectedIndex].value;
 
-      const project = projects.get(projectUID);
       project.addCard(card);
+
+      pickedCard = null;
 
       if (activeProject == projectUID) {
         displayProject(projects)(null);
@@ -78,6 +82,10 @@ const Dom = (function () {
           .namedItem("status")
           .addEventListener("change", changeTaskStatus(projects));
         main.append(section);
+
+        document
+          .querySelector(`section[data-uid="${card.uid}"]`)
+          .addEventListener("click", editCard(projects), true);
       });
     };
   }
@@ -115,6 +123,26 @@ const Dom = (function () {
         project.changeCardStatus(card);
         checkbox.parentElement.remove();
       }
+    };
+  }
+
+  function editCard(projects) {
+    return function (event) {
+      const form = document.forms.addTask;
+      const dialog = form.parentElement;
+      const section = event.currentTarget;
+      const project = projects.get(activeProject);
+      pickedCard = project.cards.get(section.dataset.uid);
+
+      console.log(event.target);
+      console.log(pickedCard);
+
+      form.elements.task.value = pickedCard.title;
+      form.elements.description.value = pickedCard.description;
+      form.elements.due.value = pickedCard.dueDate;
+      form.elements.priority.value = pickedCard.priority;
+
+      dialog.showModal();
     };
   }
 
