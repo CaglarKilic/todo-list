@@ -16,6 +16,9 @@ const Dom = (function () {
         const option = document.createElement("option");
         option.value = project.uid;
         option.textContent = project.title;
+        if (activeProject == project.uid) {
+          option.defaultSelected = true;
+        }
         select.append(option);
       });
       document.querySelector("dialog#addTask").showModal();
@@ -49,6 +52,8 @@ const Dom = (function () {
       const project = event ? projects.get(event.target.dataset.uid) : projects;
       const header = document.querySelector("header");
       const main = document.querySelector("main");
+
+      activeProject = project.uid;
 
       header.replaceChildren();
       main.replaceChildren();
@@ -97,11 +102,17 @@ const Dom = (function () {
     };
   }
 
+  function changeTaskStatus(event) {
+   const checkbox = event.target;
+   if (checkbox.checked) {
+    const card = checkbox
+   } 
+  }
+
   return {
     toggleButton,
     addTask,
     manageAddTaskModal,
-    activeProject,
     manageAddProjectModal,
     addProject,
     displayProject,
