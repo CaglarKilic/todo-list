@@ -42,17 +42,18 @@ const Dom = (function () {
       project.addCard(card);
 
       if (activeProject == projectUID) {
-        displayProject(project)(null);
+        displayProject(projects)(null);
       }
     };
   }
 
   function displayProject(projects) {
     return function (event) {
-      const project = event ? projects.get(event.target.dataset.uid) : projects;
+      const project = event
+        ? projects.get(event.target.dataset.uid)
+        : projects.get(activeProject);
       const header = document.querySelector("header");
       const main = document.querySelector("main");
-
       activeProject = project.uid;
 
       header.replaceChildren();
@@ -68,11 +69,14 @@ const Dom = (function () {
         template = document.querySelector("#cardTemplate").cloneNode(true);
         const section = template.content.firstElementChild;
         const elements = section.children;
-        section.id = card.uid;
+        section.setAttribute("data-uid", card.uid);
         elements.namedItem("cardTitle").append(card.title);
         elements.namedItem("dueDate").append(card.dueDate);
         elements.namedItem("description").append(card.description);
         elements.namedItem("priority").append(card.priority);
+        elements
+          .namedItem("status")
+          .addEventListener("change", changeTaskStatus(projects));
         main.append(section);
       });
     };
@@ -102,11 +106,16 @@ const Dom = (function () {
     };
   }
 
-  function changeTaskStatus(event) {
-   const checkbox = event.target;
-   if (checkbox.checked) {
-    const card = checkbox
-   } 
+  function changeTaskStatus(projects) {
+    return function (event) {
+      const checkbox = event.target;
+      if (checkbox.checked) {
+        const project = projects.get(activeProject);
+        const card = project.cards.get(checkbox.parentElement.dataset.uid);
+        project.changeCardStatus(card);
+        checkbox.parentElement.remove();
+      }
+    };
   }
 
   return {

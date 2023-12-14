@@ -6,12 +6,12 @@ export default class Project {
   uid;
   #dos = new MyMap();
   #done = new MyMap();
-  constructor(title) {
+  constructor(title, uid) {
     this.title = title;
-    if (title == "Inbox") {
-      this.uid = "00000001";
-    } else {
+    if (!uid) {
       this.uid = generateId();
+    } else {
+      this.uid = uid;
     }
   }
 

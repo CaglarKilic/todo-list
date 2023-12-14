@@ -6,8 +6,8 @@ import Dom from "./dom.js";
 const Projects = (function () {
   const items = new MyMap();
 
-  function addProject(title) {
-    const project = new Project(title);
+  function addProject(title, uid) {
+    const project = new Project(title, uid);
     items.set(project.uid, project);
     return project;
   }
@@ -51,4 +51,7 @@ document
   .querySelector("menu#mainMenu>li:nth-child(2)")
   .addEventListener("click", Dom.displayProject(Projects.items));
 
-Dom.displayProject(Projects.addProject("Inbox"))(null);
+
+Projects.addProject("Inbox", "00000001");
+
+Dom.displayProject(Projects.items)(null);
