@@ -1,7 +1,7 @@
 import MyMap from "./ds";
 import Project from "./project";
 import "./style.css";
-import Dom from "./Dom.js";
+import Dom from "./dom.js";
 
 const Projects = (function () {
   const items = new MyMap();
@@ -43,9 +43,7 @@ document.forms.addProject.elements.buttonAddProject.addEventListener(
 );
 
 document
-  .querySelector("menu#projectsMenu>li")
+  .querySelector("menu#projectsMenu>h2")
   .addEventListener("click", Dom.manageAddProjectModal);
 
 Projects.addProject("Inbox");
-Projects.addProject("deneme");
-Projects.addProject("hebele");

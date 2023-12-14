@@ -31,9 +31,11 @@ const Dom = (function () {
 
       const card = new Card(elements.task.value);
       card.description = elements.description.value;
-      card.date = elements.due.value;
+      card.dueDate = elements.due.value;
       card.priority =
         elements.priority.options[elements.priority.selectedIndex].value;
+
+      console.log(card);
 
       const project = projects.get(projectUID);
       project.addCard(card);
@@ -84,6 +86,16 @@ const Dom = (function () {
       const title = form.elements.projectTitle.value;
 
       const project = projects.addProject(title);
+
+      const template = document
+        .querySelector("#projectsTemplate")
+        .cloneNode(true);
+      const menu = document.querySelector("#projectsMenu");
+      const li = template.content.firstElementChild;
+      li.append(title);
+      li.setAttribute("data-uid", project.uid);
+      li.addEventListener("click", displayProject(projects.items));
+      menu.append(li);
     };
   }
 
