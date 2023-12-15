@@ -137,7 +137,9 @@ const Dom = (function () {
         li.setAttribute("data-uid", project.uid);
         li.addEventListener("click", displayProject(projects));
         edit.addEventListener("click", editProject(projects));
-        menu.append(li, edit);
+        const del = edit.nextElementSibling;
+        del.addEventListener("click", deleteProject(projects));
+        menu.append(li, edit, del);
       }
     });
   }
@@ -196,6 +198,16 @@ const Dom = (function () {
 
       form.elements.projectTitle.value = pickedProject.title;
       dialog.showModal();
+    };
+  }
+
+  function deleteProject(projects) {
+    return function (event) {
+      const project = projects.get(
+        event.target.previousElementSibling.previousElementSibling.dataset.uid
+      );
+      projects.remove(project.uid);
+      displayProjectList(projects);
     };
   }
 
