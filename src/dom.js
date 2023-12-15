@@ -81,11 +81,14 @@ const Dom = (function () {
         elements
           .namedItem("status")
           .addEventListener("change", changeTaskStatus(projects));
+        elements
+          .namedItem("delete")
+          .addEventListener("click", deleteCard(projects));
         main.append(section);
 
         document
           .querySelector(`section[data-uid="${card.uid}"]`)
-          .addEventListener("click", editCard(projects), true);
+          .addEventListener("click", editCard(projects));
       });
     };
   }
@@ -134,15 +137,22 @@ const Dom = (function () {
       const project = projects.get(activeProject);
       pickedCard = project.cards.get(section.dataset.uid);
 
-      console.log(event.target);
-      console.log(pickedCard);
-
       form.elements.task.value = pickedCard.title;
       form.elements.description.value = pickedCard.description;
       form.elements.due.value = pickedCard.dueDate;
       form.elements.priority.value = pickedCard.priority;
 
       dialog.showModal();
+    };
+  }
+
+  function deleteCard(projects) {
+    return function (event) {
+      event.stopPropagation();
+      const project = projects.get(activeProject);
+      const card = project.cards.get(event.target.parentElement.dataset.uid);
+      project.removeCard(card);
+      displayProject(projects)(null);
     };
   }
 
