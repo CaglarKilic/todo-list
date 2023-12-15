@@ -20,6 +20,7 @@
     </aside>
     <main></main>
   </body>
+
   <dialog id="addTask">
     <form name="addTask" onsubmit="return false">
       <input type="text" name="task" placeholder="Task name" />
@@ -36,6 +37,7 @@
       <button disabled name="buttonAddTask">Add Task</button>
     </form>
   </dialog>
+
   <dialog id="addProject">
     <form name="addProject" onsubmit="return false">
       <input type="text" name="projectTitle" placeholder="Project Name" />
@@ -43,9 +45,10 @@
       <button disabled name="buttonAddProject">Add Project</button>
     </form>
   </dialog>
+
   <template id="cardTemplate">
     <section>
-      <input type="checkbox" name="status" id="status">
+      <input type="checkbox" name="status" id="status" />
       <h2 id="cardTitle"></h2>
       <p id="description"></p>
       <p id="dueDate"></p>
@@ -60,5 +63,6 @@
 
   <template id="projectsTemplate">
     <li></li>
+    <button>Edit</button>
   </template>
 </html>

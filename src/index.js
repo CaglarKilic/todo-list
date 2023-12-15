@@ -47,11 +47,8 @@ document
   .querySelector("menu#projectsMenu>h2")
   .addEventListener("click", Dom.manageAddProjectModal);
 
+Projects.addProject("Inbox", "00000001");
+
 document
   .querySelector("menu#mainMenu>li:nth-child(2)")
   .addEventListener("click", Dom.displayProject(Projects.items));
-
-
-Projects.addProject("Inbox", "00000001");
-
-Dom.displayProject(Projects.items)(null);

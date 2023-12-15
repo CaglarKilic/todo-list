@@ -3,6 +3,7 @@ import Card from "./card";
 const Dom = (function () {
   let activeProject = "00000001"; //Inbox
   let pickedCard = null;
+  let pickedProject = null;
 
   function toggleButton(button) {
     return function (event) {
@@ -44,6 +45,7 @@ const Dom = (function () {
       project.addCard(card);
 
       pickedCard = null;
+      form.reset();
 
       if (activeProject == projectUID) {
         displayProject(projects)(null);
@@ -103,18 +105,34 @@ const Dom = (function () {
       const form = event.target.form;
       const title = form.elements.projectTitle.value;
 
-      const project = projects.addProject(title);
+      if (pickedProject) {
+        pickedProject.title = title;
+      } else {
+        projects.addProject(title);
+      }
 
-      const template = document
-        .querySelector("#projectsTemplate")
-        .cloneNode(true);
-      const menu = document.querySelector("#projectsMenu");
-      const li = template.content.firstElementChild;
-      li.append(title);
-      li.setAttribute("data-uid", project.uid);
-      li.addEventListener("click", displayProject(projects.items));
-      menu.append(li);
+      displayProjectList(projects.items);
+      pickedProject = null;
     };
+  }
+
+  function displayProjectList(projects) {
+    const menu = document.querySelector("#projectsMenu");
+    const h2 = menu.firstElementChild;
+    menu.replaceChildren();
+    menu.append(h2);
+    const template = document.querySelector("#projectsTemplate");
+    projects.forEach((project) => {
+      if (project.uid != "00000001") {
+        let li = template.cloneNode(true).content.firstElementChild;
+        let edit = li.nextElementSibling;
+        li.append(project.title);
+        li.setAttribute("data-uid", project.uid);
+        li.addEventListener("click", displayProject(projects));
+        edit.addEventListener("click", editProject(projects));
+        menu.append(li, edit);
+      }
+    });
   }
 
   function changeTaskStatus(projects) {
@@ -156,6 +174,21 @@ const Dom = (function () {
     };
   }
 
+  function editProject(projects) {
+    return function (event) {
+      event.stopPropagation();
+      pickedProject = projects.get(
+        event.target.previousElementSibling.dataset.uid
+      );
+
+      const form = document.forms.addProject;
+      const dialog = form.parentElement;
+
+      form.elements.projectTitle.value = pickedProject.title;
+      dialog.showModal();
+    };
+  }
+
   return {
     toggleButton,
     addTask,
@@ -163,6 +196,7 @@ const Dom = (function () {
     manageAddProjectModal,
     addProject,
     displayProject,
+    displayProjectList,
   };
 })();
 
