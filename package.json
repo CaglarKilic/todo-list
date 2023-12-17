@@ -20,6 +20,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "date-fns": "^2.30.0"
+    "vanilla-calendar-pro": "^2.9.2"
   }
 }
