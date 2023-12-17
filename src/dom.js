@@ -11,6 +11,12 @@ const Dom = (function () {
     };
   }
 
+  function showPicker(event) {
+    const date = document.querySelector("#picker");
+    date.showModal();
+    date.firstElementChild.showPicker();
+  }
+
   function manageAddTaskModal(projects) {
     return function () {
       const select = document.forms.addTask.elements.projects;
@@ -23,6 +29,7 @@ const Dom = (function () {
         }
         select.append(option);
       });
+      document.forms.addTask.due.addEventListener("click", showPicker);
       document.querySelector("dialog#addTask").showModal();
     };
   }
@@ -149,6 +156,9 @@ const Dom = (function () {
 
   function editCard(projects) {
     return function (event) {
+      if (event.target.type == "checkbox") {
+        return;
+      }
       const form = document.forms.addTask;
       const dialog = form.parentElement;
       const section = event.currentTarget;

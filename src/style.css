@@ -14,6 +14,66 @@
   list-style: none;
 }
 
+dialog#addTask {
+  top: 100px;
+  left: 350px;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px solid #282828;
+  background-color: #1e1e1e;
+  width: 480px; 
+  form {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(4, auto);
+    row-gap: 5px;
+
+    input[name="task"] {
+      grid-row: 1;
+      grid-column: 1 / span 3;
+      background-color: #1e1e1e;
+      color: white;
+      font-size: 1.5rem;
+      border: none;
+      outline: none;
+      font-weight: bold;
+    }
+
+    textarea {
+      resize: none;
+      grid-row: 2;
+      grid-column: 1 / span 3;
+      background-color: #1e1e1e;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+    }
+
+    input[name="due"] {
+      color-scheme: dark;
+      background-color: #1e1e1e;
+      border: none;
+      outline: none;
+    }
+
+    select[name="projects"] {
+      grid-row: 4;
+      grid-column: 1;
+    }
+
+    button {
+      grid-row: 4;
+      grid-column: 2;
+    }
+
+    button[name="buttonAddTask"] {
+      grid-row: 4;
+      grid-column: 3;
+    }
+  }
+}
+
 body {
   height: 100svh;
   display: grid;

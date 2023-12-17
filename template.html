@@ -24,8 +24,13 @@
   <dialog id="addTask">
     <form name="addTask" onsubmit="return false">
       <input type="text" name="task" placeholder="Task name" />
-      <textarea name="description" placeholder="description"></textarea>
-      <input type="date" name="due" placeholder="Due Date" />
+      <textarea
+        name="description"
+        placeholder="Description"
+        rows="1"
+        oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
+      ></textarea>
+      <input type="text" name="due" placeholder="Due Date" readonly />
       <select name="priority">
         <option value="1">Top</option>
         <option>2</option>
@@ -36,6 +41,10 @@
       <button>Cancel</button>
       <button disabled name="buttonAddTask">Add Task</button>
     </form>
+  </dialog>
+
+  <dialog id="picker" style="position: relative">
+    <input type="date" hidden />
   </dialog>
 
   <dialog id="addProject">
