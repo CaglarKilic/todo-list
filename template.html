@@ -19,60 +19,60 @@
       </nav>
     </aside>
     <main></main>
+    
+    <dialog id="addTask">
+      <form name="addTask" onsubmit="return false">
+        <input type="text" name="task" placeholder="Task name" />
+        <textarea
+          name="description"
+          placeholder="Description"
+          rows="1"
+          oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
+        ></textarea>
+        <input type="text" name="due" placeholder="Due Date" readonly />
+        <select name="priority">
+          <option value="1">Top</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+        <select name="projects"></select>
+        <button>Cancel</button>
+        <button disabled name="buttonAddTask">Add Task</button>
+      </form>
+    </dialog>
+
+    <dialog id="picker" style="position: relative">
+      <input type="date" hidden />
+    </dialog>
+
+    <dialog id="addProject">
+      <form name="addProject" onsubmit="return false">
+        <input type="text" name="projectTitle" placeholder="Project Name" />
+        <button>Cancel</button>
+        <button disabled name="buttonAddProject">Add Project</button>
+      </form>
+    </dialog>
+
+    <template id="cardTemplate">
+      <section>
+        <input type="checkbox" name="status" id="status" />
+        <h2 id="cardTitle"></h2>
+        <p id="description"></p>
+        <p id="dueDate"></p>
+        <p id="priority"></p>
+        <button id="delete">Delete</button>
+      </section>
+    </template>
+
+    <template id="projectTitleTemplate">
+      <h1 id="projectTitle"></h1>
+    </template>
+
+    <template id="projectsTemplate">
+      <li></li>
+      <button>Edit</button>
+      <button>Delete</button>
+    </template>
   </body>
-
-  <dialog id="addTask">
-    <form name="addTask" onsubmit="return false">
-      <input type="text" name="task" placeholder="Task name" />
-      <textarea
-        name="description"
-        placeholder="Description"
-        rows="1"
-        oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
-      ></textarea>
-      <input type="text" name="due" placeholder="Due Date" readonly />
-      <select name="priority">
-        <option value="1">Top</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-      <select name="projects"></select>
-      <button>Cancel</button>
-      <button disabled name="buttonAddTask">Add Task</button>
-    </form>
-  </dialog>
-
-  <dialog id="picker" style="position: relative">
-    <input type="date" hidden />
-  </dialog>
-
-  <dialog id="addProject">
-    <form name="addProject" onsubmit="return false">
-      <input type="text" name="projectTitle" placeholder="Project Name" />
-      <button>Cancel</button>
-      <button disabled name="buttonAddProject">Add Project</button>
-    </form>
-  </dialog>
-
-  <template id="cardTemplate">
-    <section>
-      <input type="checkbox" name="status" id="status" />
-      <h2 id="cardTitle"></h2>
-      <p id="description"></p>
-      <p id="dueDate"></p>
-      <p id="priority"></p>
-      <button id="delete">Delete</button>
-    </section>
-  </template>
-
-  <template id="projectTitleTemplate">
-    <h1 id="projectTitle"></h1>
-  </template>
-
-  <template id="projectsTemplate">
-    <li></li>
-    <button>Edit</button>
-    <button>Delete</button>
-  </template>
 </html>
