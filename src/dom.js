@@ -16,6 +16,17 @@ const Dom = (function () {
     };
   }
 
+  function toggleOverlay(dialog) {
+    const body = document.querySelector("body");
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    body.append(overlay);
+    overlay.addEventListener("click", (event) => {
+      dialog.close();
+      event.target.remove();
+    });
+  }
+
   function manageAddTaskModal(projects) {
     return function () {
       const select = document.forms.addTask.elements.projects;
@@ -29,7 +40,9 @@ const Dom = (function () {
         }
         select.append(option);
       });
-      document.querySelector("dialog#addTask").showModal();
+      const dialog = document.querySelector("dialog#addTask");
+      dialog.show();
+      toggleOverlay(dialog);
     };
   }
 
@@ -103,7 +116,8 @@ const Dom = (function () {
 
   function manageAddProjectModal() {
     const dialog = document.querySelector("#addProject");
-    dialog.showModal();
+    dialog.show();
+    toggleOverlay(dialog);
   }
 
   function addProject(projects) {

@@ -14,6 +14,13 @@
   list-style: none;
 }
 
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
 dialog#addTask {
   top: 100px;
   left: 350px;
@@ -21,7 +28,8 @@ dialog#addTask {
   border-radius: 1rem;
   border: 2px solid #282828;
   background-color: #1e1e1e;
-  width: 480px; 
+  width: 480px;
+  z-index: 2; 
   form {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -72,6 +80,10 @@ dialog#addTask {
       grid-column: 3;
     }
   }
+}
+
+dialog#addProject {
+  z-index: 2;
 }
 
 body {
