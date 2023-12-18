@@ -20,7 +20,7 @@
     </aside>
     <main></main>
 
-    <dialog id="addTask">
+    <dialog id="addTask" onclose="this.firstElementChild.reset()">
       <form
         name="addTask"
         onsubmit="return false"
@@ -34,15 +34,27 @@
           oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
         ></textarea>
         <input type="text" name="due" placeholder="Due Date" />
-        <select name="priority">
+        <select name="priority" onchange="this.style.color='white'">
+          <option value="5" disabled selected style="color: #757575">
+            Priority
+          </option>
           <option value="1">Top</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
+          <option value="2">High</option>
+          <option value="3">Mid</option>
+          <option value="4">Low</option>
+          <option value="5">None</option>
         </select>
-        <select name="projects"></select>
-        <button name="btnCancel">Cancel</button>
-        <button disabled name="buttonAddTask">Add Task</button>
+        <div class="deneme">
+          <select name="projects"></select>
+          <button
+            name="btnCancel"
+            form=""
+            onclick="document.querySelector('.overlay').dispatchEvent(new Event('click'))"
+          >
+            Cancel
+          </button>
+          <button disabled name="buttonAddTask">Add Task</button>
+        </div>
       </form>
     </dialog>
 

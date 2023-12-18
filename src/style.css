@@ -29,12 +29,12 @@ dialog#addTask {
   border: 2px solid #282828;
   background-color: #1e1e1e;
   width: 480px;
-  z-index: 2; 
+  z-index: 2;
   form {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, calc(100% / 3 - 0.5rem));
     grid-template-rows: repeat(4, auto);
-    row-gap: 5px;
+    gap: 0.5rem;
 
     .datepicker-dropdown {
       filter: invert(88%);
@@ -57,31 +57,74 @@ dialog#addTask {
       grid-column: 1 / span 3;
       background-color: #1e1e1e;
       color: white;
-      font-size: 1rem;
+      font-size: 1.25rem;
       border: none;
       outline: none;
     }
 
     input[name="due"] {
-      color-scheme: dark;
       background-color: #1e1e1e;
+      color: white;
       border: none;
       outline: none;
+      font-size: 1rem;
     }
 
-    select[name="projects"] {
-      grid-row: 4;
-      grid-column: 1;
+    select[name="priority"] {
+      background-color: #1e1e1e;
+      color: #757575;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+
+      option {
+        color: white;
+      }
     }
 
-    button {
+    div.deneme {
+      display: grid;
       grid-row: 4;
-      grid-column: 2;
-    }
+      grid-column: 1 / span 3;
+      grid-template-columns: repeat(5, calc(100% / 5 - 0.5rem));
+      padding: 1rem 0 0 0;
+      border-top: 2px solid #282828;
+      gap: 0.5rem;
 
-    button[name="buttonAddTask"] {
-      grid-row: 4;
-      grid-column: 3;
+      select[name="projects"] {
+        background-color: #1e1e1e;
+        color: white;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        grid-column: 1;
+      }
+
+      button {
+        font-size: 1rem;
+        border-radius: 10px;
+        padding: 0.5rem;
+        color: white;
+        border: none;
+      }
+
+      button:not(:disabled):hover {
+        filter: brightness(125%);
+      }
+
+      button[name="btnCancel"] {
+        grid-column: 4;
+        background-color: #292929;
+      }
+
+      button[name="buttonAddTask"] {
+        background-color: #a33b31;
+        grid-column: 5;
+      }
+
+      button[name="buttonAddTask"]:disabled {
+        filter: brightness(50%);
+      }
     }
   }
 }

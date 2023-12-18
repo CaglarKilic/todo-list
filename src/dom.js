@@ -29,7 +29,7 @@ const Dom = (function () {
 
   function manageAddTaskModal(projects) {
     return function () {
-      const select = document.forms.addTask.elements.projects;
+      let select = document.forms.addTask.elements.projects;
       select.replaceChildren();
       projects.forEach((project) => {
         const option = document.createElement("option");
@@ -42,6 +42,8 @@ const Dom = (function () {
       });
       const dialog = document.querySelector("dialog#addTask");
       dialog.show();
+      select = document.forms.addTask.elements.priority;
+      select.style.color = "#757575";
       toggleOverlay(dialog);
     };
   }
@@ -185,7 +187,7 @@ const Dom = (function () {
       form.elements.due.value = pickedCard.dueDate;
       form.elements.priority.value = pickedCard.priority;
 
-      dialog.showModal();
+      dialog.show();
     };
   }
 
