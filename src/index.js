@@ -16,7 +16,7 @@ const Projects = (function () {
 })();
 
 document
-  .querySelector("input[name=task]")
+  .querySelector(`input[name="task"]`)
   .addEventListener(
     "input",
     Dom.toggleButton(document.forms.addTask.elements.buttonAddTask)
@@ -32,7 +32,7 @@ document
   .addEventListener("click", Dom.manageAddTaskModal(Projects.items));
 
 document
-  .querySelector("input[name=projectTitle")
+  .querySelector(`input[name="projectTitle"]`)
   .addEventListener(
     "input",
     Dom.toggleButton(document.forms.addProject.elements.buttonAddProject)

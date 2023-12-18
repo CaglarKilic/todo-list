@@ -36,6 +36,10 @@ dialog#addTask {
     grid-template-rows: repeat(4, auto);
     row-gap: 5px;
 
+    .datepicker-dropdown {
+      filter: invert(88%);
+    }
+
     input[name="task"] {
       grid-row: 1;
       grid-column: 1 / span 3;
