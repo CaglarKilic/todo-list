@@ -21,6 +21,14 @@
   z-index: 1;
 }
 
+:where(select, input, textarea):focus {
+  box-shadow: 0 0 1rem blue;
+}
+
+:where(select, input, textarea) {
+  padding-left: 1rem;
+}
+
 dialog#addTask {
   top: 100px;
   left: 350px;

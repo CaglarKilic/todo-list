@@ -24,16 +24,16 @@
       <form
         name="addTask"
         onsubmit="return false"
-        onreset="this.buttonAddTask.disabled=true"
+        onreset="this.buttonAddTask.disabled=true;this.description.rows=1"
       >
-        <input type="text" value="" name="task" placeholder="Task name" />
+        <input type="text" name="task" placeholder="Task name" />
         <textarea
           name="description"
           placeholder="Description"
           rows="1"
           oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
         ></textarea>
-        <input type="text" name="due" placeholder="Due Date" />
+        <input type="text" name="due" placeholder="Due Date" onkeydown="event.preventDefault()"/>
         <select name="priority" onchange="this.style.color='white'">
           <option value="5" disabled selected style="color: #757575">
             Priority

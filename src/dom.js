@@ -61,7 +61,7 @@ const Dom = (function () {
       card.description = elements.description.value;
       card.dueDate = elements.due.value;
       card.priority =
-        elements.priority.options[elements.priority.selectedIndex].value;
+        elements.priority.options[elements.priority.selectedIndex].textContent;
 
       project.addCard(card);
 
