@@ -20,6 +20,6 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "vanilla-calendar-pro": "^2.9.2"
+    "vanillajs-datepicker": "^1.3.4"
   }
 }

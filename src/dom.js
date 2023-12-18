@@ -1,9 +1,14 @@
 import Card from "./card";
+import { Datepicker } from "vanillajs-datepicker";
+import "vanillajs-datepicker/css/datepicker.css";
 
 const Dom = (function () {
   let activeProject = "00000001"; //Inbox
   let pickedCard = null;
   let pickedProject = null;
+
+  const date = document.querySelector(`input[name="due"]`);
+  const picker = new Datepicker(date);
 
   function toggleButton(button) {
     return function (event) {
@@ -11,15 +16,10 @@ const Dom = (function () {
     };
   }
 
-  function showPicker(event) {
-    const date = document.querySelector("#picker");
-    date.showModal();
-    date.firstElementChild.showPicker();
-  }
-
   function manageAddTaskModal(projects) {
     return function () {
       const select = document.forms.addTask.elements.projects;
+      select.replaceChildren();
       projects.forEach((project) => {
         const option = document.createElement("option");
         option.value = project.uid;
@@ -29,7 +29,6 @@ const Dom = (function () {
         }
         select.append(option);
       });
-      document.forms.addTask.due.addEventListener("click", showPicker);
       document.querySelector("dialog#addTask").showModal();
     };
   }
