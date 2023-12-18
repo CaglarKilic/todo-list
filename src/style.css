@@ -30,6 +30,7 @@ dialog#addTask {
   background-color: #1e1e1e;
   width: 480px;
   z-index: 2;
+
   form {
     display: grid;
     grid-template-columns: repeat(3, calc(100% / 3 - 0.5rem));
@@ -82,7 +83,7 @@ dialog#addTask {
       }
     }
 
-    div.deneme {
+    div.bottom {
       display: grid;
       grid-row: 4;
       grid-column: 1 / span 3;
@@ -131,6 +132,58 @@ dialog#addTask {
 
 dialog#addProject {
   z-index: 2;
+  top: 100px;
+  left: 350px;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 2px solid #282828;
+  background-color: #1e1e1e;
+  width: 480px;
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(5, calc(100% / 5 - 0.5rem));
+    grid-template-rows: repet(2, auto);
+    gap: 0.5rem;
+
+    input {
+      grid-row: 1;
+      grid-column: 1 / span 5;
+      background-color: #1e1e1e;
+      color: white;
+      font-size: 1.5rem;
+      border: none;
+      outline: none;
+      font-weight: bold;
+    }
+
+    button {
+      font-size: 1rem;
+      border-radius: 10px;
+      padding: 0.5rem;
+      color: white;
+      border: none;
+      grid-row: 2;
+    }
+
+    button:not(:disabled):hover {
+      filter: brightness(125%);
+    }
+
+    button[name="btnCancel"] {
+      grid-column: 4;
+      background-color: #292929;
+    }
+
+    button[name="buttonAddProject"] {
+      background-color: #a33b31;
+      grid-column: 5;
+    }
+
+    button[name="buttonAddProject"]:disabled {
+      filter: brightness(50%);
+    }
+  }
 }
 
 body {

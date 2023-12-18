@@ -44,7 +44,7 @@
           <option value="4">Low</option>
           <option value="5">None</option>
         </select>
-        <div class="deneme">
+        <div class="bottom">
           <select name="projects"></select>
           <button
             name="btnCancel"
@@ -58,11 +58,20 @@
       </form>
     </dialog>
 
-    <dialog id="addProject">
-      <form name="addProject" onsubmit="return false">
+    <dialog id="addProject" onclose="this.firstElementChild.reset()">
+      <form
+        name="addProject"
+        onsubmit="return false"
+        onreset="this.buttonAddProject.disabled=true"
+      >
         <input type="text" name="projectTitle" placeholder="Project Name" />
-        <button>Cancel</button>
-        <button disabled name="buttonAddProject">Add Project</button>
+        <button
+          name="btnCancel"
+          onclick="document.querySelector('.overlay').dispatchEvent(new Event('click'))"
+        >
+          Cancel
+        </button>
+        <button disabled name="buttonAddProject">Add</button>
       </form>
     </dialog>
 

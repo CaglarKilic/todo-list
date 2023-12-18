@@ -135,6 +135,7 @@ const Dom = (function () {
 
       displayProjectList(projects.items);
       pickedProject = null;
+      form.reset();
     };
   }
 
