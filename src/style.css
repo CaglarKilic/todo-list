@@ -81,13 +81,17 @@ dialog#addTask {
 
     select[name="priority"] {
       background-color: #1e1e1e;
-      color: #757575;
       border: none;
       outline: none;
       font-size: 1rem;
+      color: #757575;
 
       option {
         color: white;
+      }
+
+      option:disabled {
+        color: #757575;
       }
     }
 

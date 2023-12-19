@@ -16,6 +16,15 @@ const Projects = (function () {
 })();
 
 document
+  .querySelector("form[name='addTask']")
+  .addEventListener("reset", (event) => {
+    event.target.elements.priority.style.color = "#757575";
+    event.target.buttonAddTask.disabled = true;
+    event.target.description.rows = 1;
+    event.target.task.focus();
+  });
+
+document
   .querySelector(`input[name="task"]`)
   .addEventListener(
     "input",
@@ -47,8 +56,25 @@ document
   .querySelector("menu#projectsMenu>h2")
   .addEventListener("click", Dom.manageAddProjectModal);
 
-Projects.addProject("Inbox", "00000001");
-
 document
   .querySelector("menu#mainMenu>li:nth-child(2)")
   .addEventListener("click", Dom.displayProject(Projects.items));
+
+document
+  .querySelector("input[name='due']")
+  .addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+      event.preventDefault();
+    }
+  });
+
+document
+  .querySelector("select[name='priority']")
+  .addEventListener("change", (event) => {
+    const select = event.target;
+    const option = select.options[select.selectedIndex];
+    const color = window.getComputedStyle(option).getPropertyValue("color");
+    select.style.color = color;
+  });
+
+Projects.addProject("Inbox", "00000001");

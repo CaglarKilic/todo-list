@@ -21,11 +21,7 @@
     <main></main>
 
     <dialog id="addTask" onclose="this.firstElementChild.reset()">
-      <form
-        name="addTask"
-        onsubmit="return false"
-        onreset="this.buttonAddTask.disabled=true;this.description.rows=1"
-      >
+      <form name="addTask" onsubmit="return false">
         <input type="text" name="task" placeholder="Task name" />
         <textarea
           name="description"
@@ -33,11 +29,9 @@
           rows="1"
           oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
         ></textarea>
-        <input type="text" name="due" placeholder="Due Date" onkeydown="event.preventDefault()"/>
-        <select name="priority" onchange="this.style.color='white'">
-          <option value="5" disabled selected style="color: #757575">
-            Priority
-          </option>
+        <input type="text" name="due" placeholder="Due Date" />
+        <select name="priority">
+          <option value="5" disabled selected>Priority</option>
           <option value="1">Top</option>
           <option value="2">High</option>
           <option value="3">Mid</option>
@@ -67,6 +61,7 @@
         <input type="text" name="projectTitle" placeholder="Project Name" />
         <button
           name="btnCancel"
+          form=""
           onclick="document.querySelector('.overlay').dispatchEvent(new Event('click'))"
         >
           Cancel

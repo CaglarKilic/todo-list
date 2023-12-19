@@ -43,7 +43,6 @@ const Dom = (function () {
       const dialog = document.querySelector("dialog#addTask");
       dialog.show();
       select = document.forms.addTask.elements.priority;
-      select.style.color = "#757575";
       toggleOverlay(dialog);
     };
   }
@@ -56,12 +55,13 @@ const Dom = (function () {
         elements.projects.options[elements.projects.selectedIndex].value;
       const project = projects.get(projectUID);
 
-      const card = pickedCard || new Card(elements.task.value);
+      const card = pickedCard || new Card();
 
+      card.title = elements.task.value;
       card.description = elements.description.value;
       card.dueDate = elements.due.value;
       card.priority =
-        elements.priority.options[elements.priority.selectedIndex].textContent;
+        elements.priority.options[elements.priority.selectedIndex].value;
 
       project.addCard(card);
 
@@ -92,6 +92,14 @@ const Dom = (function () {
       template.content.children.namedItem("projectTitle").append(project.title);
       header.append(template.content);
 
+      const prioMap = {
+        1: "Top",
+        2: "High",
+        3: "Mid",
+        4: "Low",
+        5: "None",
+      };
+
       project.cards.forEach((card) => {
         template = document.querySelector("#cardTemplate").cloneNode(true);
         const section = template.content.firstElementChild;
@@ -100,7 +108,7 @@ const Dom = (function () {
         elements.namedItem("cardTitle").append(card.title);
         elements.namedItem("dueDate").append(card.dueDate);
         elements.namedItem("description").append(card.description);
-        elements.namedItem("priority").append(card.priority);
+        elements.namedItem("priority").append(prioMap[card.priority]);
         elements
           .namedItem("status")
           .addEventListener("change", changeTaskStatus(projects));
@@ -136,6 +144,7 @@ const Dom = (function () {
       displayProjectList(projects.items);
       pickedProject = null;
       form.reset();
+      // document.querySelector(".overlay").dispatchEvent(new Event("click"));
     };
   }
 
@@ -179,16 +188,35 @@ const Dom = (function () {
       }
       const form = document.forms.addTask;
       const dialog = form.parentElement;
+      const button = form.elements.buttonAddTask;
       const section = event.currentTarget;
       const project = projects.get(activeProject);
       pickedCard = project.cards.get(section.dataset.uid);
 
+      function revert() {
+        button.textContent = "Add Task";
+        document.querySelector(".overlay").dispatchEvent(new Event("click"));
+        pickedCard = null;
+      }
+
+      button.addEventListener("click", revert, { once: true });
+
+      dialog.addEventListener("close", () => {
+        button.removeEventListener("click", revert);
+        button.textContent = "Add Task";
+        pickedCard = null;
+      });
+
+      button.disabled = false;
+      button.textContent = "Edit Task";
+
       form.elements.task.value = pickedCard.title;
       form.elements.description.value = pickedCard.description;
       form.elements.due.value = pickedCard.dueDate;
-      form.elements.priority.value = pickedCard.priority;
+      form.elements.priority.selectedIndex = pickedCard.priority;
+      form.elements.priority.style.color = "white";
 
-      dialog.show();
+      manageAddTaskModal(projects)();
     };
   }
 
@@ -204,16 +232,33 @@ const Dom = (function () {
 
   function editProject(projects) {
     return function (event) {
-      event.stopPropagation();
       pickedProject = projects.get(
         event.target.previousElementSibling.dataset.uid
       );
 
       const form = document.forms.addProject;
       const dialog = form.parentElement;
+      const button = form.elements.buttonAddProject;
+
+      function revert() {
+        button.textContent = "Add";
+        document.querySelector(".overlay").dispatchEvent(new Event("click"));
+        pickedProject = null;
+      }
+
+      button.addEventListener("click", revert, { once: true });
+
+      dialog.addEventListener("close", () => {
+        button.removeEventListener("click", revert);
+        button.textContent = "Add";
+        pickedProject = null;
+      });
+
+      button.disabled = false;
+      button.textContent = "Edit";
 
       form.elements.projectTitle.value = pickedProject.title;
-      dialog.showModal();
+      manageAddProjectModal();
     };
   }
 
