@@ -43,6 +43,11 @@ const Dom = (function () {
       const dialog = document.querySelector("dialog#addTask");
       dialog.show();
       select = document.forms.addTask.elements.priority;
+      const textarea = document.forms.addTask.elements.description;
+      textarea.rows = 1;
+      while (textarea.clientHeight < textarea.scrollHeight) {
+        textarea.rows += 1;
+      }
       toggleOverlay(dialog);
     };
   }
@@ -59,7 +64,8 @@ const Dom = (function () {
 
       card.title = elements.task.value;
       card.description = elements.description.value;
-      card.dueDate = elements.due.value;
+      const date = Datepicker.parseDate(elements.due.value, "mm/dd/yyyy");
+      card.dueDate = date ? Datepicker.formatDate(date, "d M y, DD") : "";
       card.priority =
         elements.priority.options[elements.priority.selectedIndex].value;
 
@@ -93,33 +99,41 @@ const Dom = (function () {
       header.append(template.content);
 
       const prioMap = {
-        1: "Top",
-        2: "High",
-        3: "Mid",
-        4: "Low",
-        5: "None",
+        1: "top",
+        2: "high",
+        3: "mid",
+        4: "low",
+        5: "none",
       };
 
       project.cards.forEach((card) => {
         template = document.querySelector("#cardTemplate").cloneNode(true);
         const section = template.content.firstElementChild;
         const elements = section.children;
+
         section.setAttribute("data-uid", card.uid);
         elements.namedItem("cardTitle").append(card.title);
         elements.namedItem("dueDate").append(card.dueDate);
         elements.namedItem("description").append(card.description);
-        elements.namedItem("priority").append(prioMap[card.priority]);
+        elements.namedItem("status").classList.add(prioMap[card.priority]);
         elements
           .namedItem("status")
           .addEventListener("change", changeTaskStatus(projects));
         elements
           .namedItem("delete")
           .addEventListener("click", deleteCard(projects));
-        main.append(section);
 
-        document
-          .querySelector(`section[data-uid="${card.uid}"]`)
-          .addEventListener("click", editCard(projects));
+        section.addEventListener("click", editCard(projects));
+        section.addEventListener(
+          "mouseover",
+          () => (elements.namedItem("delete").hidden = false)
+        );
+        section.addEventListener(
+          "mouseout",
+          () => (elements.namedItem("delete").hidden = true)
+        );
+
+        main.append(section);
       });
     };
   }
@@ -144,7 +158,6 @@ const Dom = (function () {
       displayProjectList(projects.items);
       pickedProject = null;
       form.reset();
-      // document.querySelector(".overlay").dispatchEvent(new Event("click"));
     };
   }
 
@@ -212,7 +225,10 @@ const Dom = (function () {
 
       form.elements.task.value = pickedCard.title;
       form.elements.description.value = pickedCard.description;
-      form.elements.due.value = pickedCard.dueDate;
+      const date = Datepicker.parseDate(pickedCard.dueDate, "d M y, DD");
+      form.elements.due.value = date
+        ? Datepicker.formatDate(date, "mm/dd/yyyy")
+        : "";
       form.elements.priority.selectedIndex = pickedCard.priority;
       form.elements.priority.style.color = "white";
 

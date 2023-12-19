@@ -29,7 +29,7 @@
           rows="1"
           oninput="this.rows=1;while(this.clientHeight<this.scrollHeight){this.rows+=1}"
         ></textarea>
-        <input type="text" name="due" placeholder="Due Date" />
+        <input type="search" name="due" placeholder="Due Date" />
         <select name="priority">
           <option value="5" disabled selected>Priority</option>
           <option value="1">Top</option>
@@ -71,13 +71,13 @@
     </dialog>
 
     <template id="cardTemplate">
-      <section>
+      <section class="card">
         <input type="checkbox" name="status" id="status" />
-        <h2 id="cardTitle"></h2>
+        <h3 id="cardTitle"></h3>
         <p id="description"></p>
         <p id="dueDate"></p>
-        <p id="priority"></p>
-        <button id="delete">Delete</button>
+        <i id="priority"></i>
+        <button id="delete" hidden>Delete</button>
       </section>
     </template>
 
