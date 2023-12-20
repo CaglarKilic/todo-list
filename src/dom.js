@@ -48,6 +48,9 @@ const Dom = (function () {
       while (textarea.clientHeight < textarea.scrollHeight) {
         textarea.rows += 1;
       }
+      if (dialog.firstElementChild.task.classList.contains("task-done-edit")) {
+        dialog.firstElementChild.task.blur();
+      }
       toggleOverlay(dialog);
     };
   }
@@ -185,12 +188,20 @@ const Dom = (function () {
   function changeTaskStatus(projects) {
     return function (event) {
       const checkbox = event.target;
-      if (checkbox.checked) {
-        const project = projects.get(activeProject);
-        const card = project.cards.get(checkbox.parentElement.dataset.uid);
-        project.changeCardStatus(card);
-        checkbox.parentElement.remove();
-      }
+
+      const project = projects.get(activeProject);
+      const card = project.cards.get(checkbox.parentElement.dataset.uid);
+      project.changeCardStatus(card);
+
+      const section = checkbox.parentElement;
+      [...section.children]
+        .slice(1, -1)
+        .forEach((elem) => elem.classList.toggle("task-done"));
+      const form = document.querySelector("form[name='addTask']");
+      console.log(form);
+      [...form.elements].forEach((elem) =>
+        elem.classList.toggle("task-done-edit")
+      );
     };
   }
 

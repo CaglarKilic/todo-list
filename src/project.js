@@ -40,6 +40,6 @@ export default class Project {
   }
 
   get cards() {
-    return this.#dos;
+    return new Map([...this.#dos, ...this.#done]);
   }
 }
