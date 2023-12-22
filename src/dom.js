@@ -77,9 +77,10 @@ const Dom = (function () {
       pickedCard = null;
       form.reset();
 
-      if (activeProject == projectUID) {
-        displayProject(projects)(null);
+      if (activeProject != projectUID) {
+        projects.get(activeProject).removeCard(card);
       }
+      displayProject(projects)(null);
     };
   }
 
