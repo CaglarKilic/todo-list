@@ -81,6 +81,7 @@ const Dom = (function () {
         projects.get(activeProject).removeCard(card);
       }
       displayProject(projects)(null);
+      displayProjectList(projects);
     };
   }
 
@@ -184,6 +185,16 @@ const Dom = (function () {
         del.addEventListener("click", deleteProject(projects));
         li.append(h3, edit, del);
         menu.append(li);
+        if (project.size > 0) {
+          li.setAttribute("data-count", project.size);
+        }
+      }
+
+      const inbox = projects.get("00000001");
+      const inboxDom = document.querySelector("menu#mainMenu>li:nth-child(2)");
+
+      if (inbox.size > 0) {
+        inboxDom.setAttribute("data-count", inbox.size);
       }
     });
   }
@@ -205,6 +216,7 @@ const Dom = (function () {
       [...form.elements].forEach((elem) =>
         elem.classList.toggle("task-done-edit")
       );
+      displayProjectList(projects);
     };
   }
 
@@ -257,6 +269,7 @@ const Dom = (function () {
       const card = project.cards.get(event.target.parentElement.dataset.uid);
       project.removeCard(card);
       displayProject(projects)(null);
+      displayProjectList(projects);
     };
   }
 

@@ -356,15 +356,44 @@ aside {
     grid-template-rows: 1fr 2fr;
 
     menu#mainMenu {
-      padding: 0 1rem;
+      margin-top: 3rem;
 
-      /* li {
+      li {
         display: flex;
-        justify-content: end;
-      } */
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: #bd4337;
+        padding: 5px 1rem;
+        cursor: pointer;
+
+        span {
+          flex-grow: 1;
+        }
+      }
+
+      li:hover {
+        background-color: #363636;
+        border-radius: 5px;
+      }
 
       li:nth-child(1)::before {
-        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='32' %3E%3Ccircle cx='10' cy='12' r='10' fill='%23BD4337' /%3E%3C/svg%3E");
+        content: url("assets/add.svg");
+      }
+
+      li:nth-child(2) {
+        color: inherit;
+        font-weight: inherit;
+      }
+
+      li:nth-child(2)::before {
+        content: url("assets/inbox.svg");
+      }
+
+      li:nth-child(2)::after {
+        content: attr(data-count);
+        font-size: small;
+        color: gray;
       }
     }
 
@@ -391,21 +420,33 @@ aside {
       }
 
       li {
-        display: grid;
-        grid-template-columns: 4fr 1fr 1fr;
-        gap: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.50rem;
         border-radius: 5px;
-        padding: 5px 1rem;
+        padding: 8px 1rem;
         cursor: pointer;
 
         button {
           visibility: hidden;
-          border-radius: 5px;
+          border: none;
+          outline: none;
         }
 
-        button:hover {
-          filter: brightness(125%);
+        h3 {
+          flex-grow: 1;
         }
+      }
+
+      li::before {
+        content: "#";
+        color: gray;
+      }
+
+      li::after {
+        content: attr(data-count);
+        font-size: small;
+        color: gray;
       }
 
       li:hover {
@@ -413,10 +454,24 @@ aside {
 
         button {
           visibility: visible;
-          background-color: #a33b31;
+          background-color: inherit;
           color: white;
           border: none;
           outline: none;
+          cursor: pointer;
+        }
+
+        button:nth-child(2)::before {
+          content: url("assets/edit.svg");
+        }
+
+        button:nth-child(3)::before {
+          content: url("assets/trash.svg");
+        }
+
+        button:nth-child(2):hover::before,
+        button:nth-child(3):hover::before {
+          filter: brightness(150%);
         }
       }
     }

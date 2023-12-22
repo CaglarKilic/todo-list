@@ -15,6 +15,10 @@ export default class Project {
     }
   }
 
+  get size() {
+    return this.#dos.size;
+  }
+
   getCard(card) {
     return this.#dos.get(card.uid) || this.#done.get(card.uid);
   }
