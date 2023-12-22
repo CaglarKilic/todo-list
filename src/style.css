@@ -348,7 +348,79 @@ aside {
   background-color: var(--dark-theme-side);
   grid-column: 1;
   grid-row: 1 / span 2;
-  padding: 1rem;
+  padding: 0.5rem;
+
+  nav {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+
+    menu#mainMenu {
+      padding: 0 1rem;
+
+      /* li {
+        display: flex;
+        justify-content: end;
+      } */
+
+      li:nth-child(1)::before {
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='32' %3E%3Ccircle cx='10' cy='12' r='10' fill='%23BD4337' /%3E%3C/svg%3E");
+      }
+    }
+
+    menu#projectsMenu {
+      grid-row: 2;
+
+      h2 {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: 5px 1rem;
+        color: #b3b3b3;
+      }
+
+      h2:hover {
+        background-color: #363636;
+        border-radius: 5px;
+      }
+
+      h2:hover::after {
+        content: "+";
+        color: white;
+      }
+
+      li {
+        display: grid;
+        grid-template-columns: 4fr 1fr 1fr;
+        gap: 0.5rem;
+        border-radius: 5px;
+        padding: 5px 1rem;
+        cursor: pointer;
+
+        button {
+          visibility: hidden;
+          border-radius: 5px;
+        }
+
+        button:hover {
+          filter: brightness(125%);
+        }
+      }
+
+      li:hover {
+        background-color: #363636;
+
+        button {
+          visibility: visible;
+          background-color: #a33b31;
+          color: white;
+          border: none;
+          outline: none;
+        }
+      }
+    }
+  }
 }
 
 main {

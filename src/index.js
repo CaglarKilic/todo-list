@@ -78,3 +78,4 @@ document
   });
 
 Projects.addProject("Inbox", "00000001");
+Dom.displayProject(Projects.items)();

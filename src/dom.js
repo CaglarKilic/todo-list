@@ -87,7 +87,7 @@ const Dom = (function () {
   function displayProject(projects) {
     return function (event) {
       const project = event
-        ? projects.get(event.target.dataset.uid)
+        ? projects.get(event.currentTarget.dataset.uid)
         : projects.get(activeProject);
       const header = document.querySelector("header");
       const main = document.querySelector("main");
@@ -174,14 +174,16 @@ const Dom = (function () {
     projects.forEach((project) => {
       if (project.uid != "00000001") {
         let li = template.cloneNode(true).content.firstElementChild;
-        let edit = li.nextElementSibling;
-        li.append(project.title);
         li.setAttribute("data-uid", project.uid);
         li.addEventListener("click", displayProject(projects));
+        const h3 = li.firstElementChild;
+        h3.append(project.title);
+        const edit = h3.nextElementSibling;
         edit.addEventListener("click", editProject(projects));
         const del = edit.nextElementSibling;
         del.addEventListener("click", deleteProject(projects));
-        menu.append(li, edit, del);
+        li.append(h3, edit, del);
+        menu.append(li);
       }
     });
   }
@@ -260,9 +262,8 @@ const Dom = (function () {
 
   function editProject(projects) {
     return function (event) {
-      pickedProject = projects.get(
-        event.target.previousElementSibling.dataset.uid
-      );
+      event.stopPropagation();
+      pickedProject = projects.get(event.target.parentElement.dataset.uid);
 
       const form = document.forms.addProject;
       const dialog = form.parentElement;
@@ -272,6 +273,7 @@ const Dom = (function () {
         button.textContent = "Add";
         document.querySelector(".overlay").dispatchEvent(new Event("click"));
         pickedProject = null;
+        displayProject(projects)();
       }
 
       button.addEventListener("click", revert, { once: true });
@@ -292,11 +294,14 @@ const Dom = (function () {
 
   function deleteProject(projects) {
     return function (event) {
-      const project = projects.get(
-        event.target.previousElementSibling.previousElementSibling.dataset.uid
-      );
+      event.stopPropagation();
+      const project = projects.get(event.target.parentElement.dataset.uid);
       projects.remove(project.uid);
       displayProjectList(projects);
+      if (activeProject == project.uid) {
+        activeProject = "00000001";
+      }
+      displayProject(projects)();
     };
   }
 
