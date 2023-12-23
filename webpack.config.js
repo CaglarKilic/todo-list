@@ -8,7 +8,7 @@ module.exports = {
   },
   devServer: {
     static: "./dist",
-    watchFiles: ['./template.html']
+    watchFiles: ["./template.html"],
   },
   devtool: "eval-source-map",
   plugins: [

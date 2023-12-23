@@ -80,19 +80,31 @@ const Dom = (function () {
       if (activeProject != projectUID) {
         projects.get(activeProject).removeCard(card);
       }
-      displayProject(projects)(null);
       displayProjectList(projects);
+      displayProject(projects)(null);
     };
   }
 
   function displayProject(projects) {
     return function (event) {
+      const highlight = function () {
+        projects.forEach((project) => {
+          const dom = document.querySelector(`li[data-uid="${project.uid}"]`);
+          if (project.uid == activeProject) {
+            dom.classList.add("highlight-project");
+          } else {
+            dom.classList.remove("highlight-project");
+          }
+        });
+      };
       const project = event
         ? projects.get(event.currentTarget.dataset.uid)
         : projects.get(activeProject);
       const header = document.querySelector("header");
       const main = document.querySelector("main");
       activeProject = project.uid;
+
+      highlight();
 
       header.replaceChildren();
       main.replaceChildren();
