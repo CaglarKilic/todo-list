@@ -73,6 +73,7 @@ const Dom = (function () {
         elements.priority.options[elements.priority.selectedIndex].value;
 
       project.addCard(card);
+      updateLocalStorage(project);
 
       pickedCard = null;
       form.reset();
@@ -153,6 +154,7 @@ const Dom = (function () {
         if (!card.status) {
           card.status = true; //following event changes back to false.
           elements.namedItem("status").dispatchEvent(new Event("change"));
+          elements.namedItem("status").checked = true;
         }
 
         main.append(section);
@@ -230,6 +232,7 @@ const Dom = (function () {
         elem.classList.toggle("task-done-edit")
       );
       displayProjectList(projects);
+      updateLocalStorage(project);
     };
   }
 
@@ -281,6 +284,7 @@ const Dom = (function () {
       const project = projects.get(activeProject);
       const card = project.cards.get(event.target.parentElement.dataset.uid);
       project.removeCard(card);
+      updateLocalStorage(project);
       displayProject(projects)(null);
       displayProjectList(projects);
     };
@@ -329,6 +333,19 @@ const Dom = (function () {
       }
       displayProject(projects)();
     };
+  }
+
+  function updateLocalStorage(project) {
+    const cards = Array.from(project.cards.values());
+    const projects = JSON.parse(localStorage.getItem("projects"));
+    const p = {
+      title: project.title,
+      uid: project.uid,
+      cards: cards,
+    };
+    console.log(p);
+    projects[project.uid] = p;
+    localStorage.setItem("projects", JSON.stringify(projects));
   }
 
   return {

@@ -7,13 +7,13 @@ import Card from "./card.js";
 if (!localStorage.length) {
   localStorage.setItem(
     "projects",
-    JSON.stringify([
-      {
+    JSON.stringify({
+      "00000001": {
         uid: "00000001",
         title: "Inbox",
         cards: [],
       },
-    ])
+    })
   );
 }
 
@@ -91,11 +91,11 @@ document
     select.style.color = color;
   });
 
-JSON.parse(localStorage.getItem("projects")).forEach((project) => {
-  const p = Projects.addProject(project.title, project.uid);
-  project.cards.dos.forEach((card) => {
-    p.addCard(new Card(card));
-  });
-});
+const projects = JSON.parse(localStorage.getItem("projects"));
+for (const uid in projects) {
+  const parsed = projects[uid];
+  const project = Projects.addProject(parsed.title, uid);
+  parsed.cards.forEach((card) => project.addCard(new Card(card)));
+}
 
 Dom.displayProject(Projects.items)();
