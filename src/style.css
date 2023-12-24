@@ -74,9 +74,9 @@ section.card {
   input:hover:not(:checked)::before {
     content: "\2713";
     display: flex;
-    font-weight: bolder;
     justify-content: center;
-    font-size: 1.1rem;
+    font-weight: bolder;
+    font-size: 110%;
     color: #008000;
     filter: brightness(75%);
   }
@@ -89,10 +89,10 @@ section.card {
 
   input:checked::before {
     content: "\2713";
-    display: flex;
     font-weight: bolder;
+    display: flex;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 110%;
     color: #008000;
     filter: brightness(150%);
   }

@@ -63,7 +63,7 @@ const Dom = (function () {
         elements.projects.options[elements.projects.selectedIndex].value;
       const project = projects.get(projectUID);
 
-      const card = pickedCard || new Card();
+      const card = pickedCard || new Card({});
 
       card.title = elements.task.value;
       card.description = elements.description.value;
@@ -149,6 +149,11 @@ const Dom = (function () {
           "mouseout",
           () => (elements.namedItem("delete").hidden = true)
         );
+
+        if (!card.status) {
+          card.status = true; //following event changes back to false.
+          elements.namedItem("status").dispatchEvent(new Event("change"));
+        }
 
         main.append(section);
       });

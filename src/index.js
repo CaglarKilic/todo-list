@@ -2,6 +2,20 @@ import MyMap from "./ds";
 import Project from "./project";
 import "./style.css";
 import Dom from "./dom.js";
+import Card from "./card.js";
+
+if (!localStorage.length) {
+  localStorage.setItem(
+    "projects",
+    JSON.stringify([
+      {
+        uid: "00000001",
+        title: "Inbox",
+        cards: [],
+      },
+    ])
+  );
+}
 
 const Projects = (function () {
   const items = new MyMap();
@@ -77,5 +91,11 @@ document
     select.style.color = color;
   });
 
-Projects.addProject("Inbox", "00000001");
+JSON.parse(localStorage.getItem("projects")).forEach((project) => {
+  const p = Projects.addProject(project.title, project.uid);
+  project.cards.dos.forEach((card) => {
+    p.addCard(new Card(card));
+  });
+});
+
 Dom.displayProject(Projects.items)();

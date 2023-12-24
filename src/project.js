@@ -4,8 +4,7 @@ import generateId from "./utility";
 export default class Project {
   title;
   uid;
-  #dos = new MyMap();
-  #done = new MyMap();
+  cards = new MyMap();
   constructor(title, uid) {
     this.title = title;
     if (!uid) {
@@ -16,34 +15,26 @@ export default class Project {
   }
 
   get size() {
-    return this.#dos.size;
+    return [...this.cards].filter((card) => card.status).length;
   }
 
   getCard(card) {
-    return this.#dos.get(card.uid) || this.#done.get(card.uid);
+    return this.cards.get(card.uid);
   }
 
   getCardStatus(card) {
-    return this.#dos.has(card.uid);
+    return this.cards.has(card.uid);
   }
 
   addCard(card) {
-    this.#dos.set(card.uid, card);
+    this.cards.set(card.uid, card);
   }
 
   removeCard(card) {
-    return this.#dos.remove(card.uid) || this.#done.remove(card.uid);
+    return this.cards.remove(card.uid);
   }
 
   changeCardStatus(card) {
-    if (this.getCardStatus(card)) {
-      this.#done.set(card.uid, this.removeCard(card));
-    } else {
-      this.#dos.set(card.uid, this.removeCard(card));
-    }
-  }
-
-  get cards() {
-    return new Map([...this.#dos, ...this.#done]);
+    card.status = card.status ? false : true;
   }
 }
