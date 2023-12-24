@@ -6,8 +6,20 @@ export default class Card {
   dueDate;
   priority;
   uid;
-  constructor(title) {
+  status;
+  constructor({
+    title,
+    uid,
+    status = true,
+    description = "",
+    dueDate = "",
+    priority = 5,
+  }) {
     this.title = title;
-    this.uid = generateId();
+    this.uid = uid || generateId();
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.status = status;
   }
 }
