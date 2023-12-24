@@ -197,17 +197,13 @@ const Dom = (function () {
         del.addEventListener("click", deleteProject(projects));
         li.append(h3, edit, del);
         menu.append(li);
-        if (project.size > 0) {
-          li.setAttribute("data-count", project.size);
-        }
+        li.setAttribute("data-count", project.size > 0 ? project.size : "");
       }
 
       const inbox = projects.get("00000001");
       const inboxDom = document.querySelector("menu#mainMenu>li:nth-child(2)");
 
-      if (inbox.size > 0) {
-        inboxDom.setAttribute("data-count", inbox.size);
-      }
+      inboxDom.setAttribute("data-count", inbox.size > 0 ? inbox.size : "");
     });
   }
 
