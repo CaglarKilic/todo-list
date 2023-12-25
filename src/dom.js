@@ -105,8 +105,6 @@ const Dom = (function () {
       const main = document.querySelector("main");
       activeProject = project.uid;
 
-      highlight();
-
       header.replaceChildren();
       main.replaceChildren();
 
@@ -159,6 +157,7 @@ const Dom = (function () {
 
         main.append(section);
       });
+      highlight();
     };
   }
 
@@ -175,8 +174,9 @@ const Dom = (function () {
 
       if (pickedProject) {
         pickedProject.title = title;
+        updateLocalStorage(pickedProject);
       } else {
-        projects.addProject(title);
+        updateLocalStorage(projects.addProject(title));
       }
 
       displayProjectList(projects.items);
@@ -332,19 +332,25 @@ const Dom = (function () {
         activeProject = "00000001";
       }
       displayProject(projects)();
+      updateLocalStorage(project, true);
     };
   }
 
-  function updateLocalStorage(project) {
-    const cards = Array.from(project.cards.values());
+  function updateLocalStorage(project, del = false) {
     const projects = JSON.parse(localStorage.getItem("projects"));
-    const p = {
-      title: project.title,
-      uid: project.uid,
-      cards: cards,
-    };
-    console.log(p);
-    projects[project.uid] = p;
+    if (del) {
+      delete projects[project.uid];
+    } else {
+      const cards = Array.from(project.cards.values());
+      const p = {
+        title: project.title,
+        uid: project.uid,
+        cards: cards,
+      };
+      console.log(p);
+      projects[project.uid] = p;
+    }
+
     localStorage.setItem("projects", JSON.stringify(projects));
   }
 

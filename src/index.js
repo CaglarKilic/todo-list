@@ -98,4 +98,5 @@ for (const uid in projects) {
   parsed.cards.forEach((card) => project.addCard(new Card(card)));
 }
 
+Dom.displayProjectList(Projects.items);
 Dom.displayProject(Projects.items)();
