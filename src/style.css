@@ -380,6 +380,7 @@ aside {
         color: #bd4337;
         padding: 5px 1rem;
         cursor: pointer;
+        line-height: 1;
 
         span {
           flex-grow: 1;
