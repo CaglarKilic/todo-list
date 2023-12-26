@@ -15,7 +15,7 @@ export default class Project {
   }
 
   get size() {
-    return [...this.cards].filter((card) => card.status).length;
+   return [...this.cards].filter((card) => card[1].status).length;
   }
 
   getCard(card) {
